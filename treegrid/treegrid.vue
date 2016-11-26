@@ -22,7 +22,6 @@
 </template>
 <script>
     import Vue from 'vue';
-    import _ from 'lodash';
     export default {
         name: 'treegrid',
         props: ['items'],
@@ -45,7 +44,7 @@
                 for(var i=1;i<level;i++){
                     spaceHtml+="";
                 }
-                _.each(items,function(item,index){
+                [].forEach.call(items,function(item,index){
                     item = Object.assign({},item,{"parent":parent,"level":level,"spaceHtml":spaceHtml});
                     if((typeof item.expanded)=="undefined"){
                         item = Object.assign({},item,{"expanded":false});
@@ -86,7 +85,7 @@
                             me.open(index,item);
                         }else {
                             item.load = true;
-                            _.each(item.children,function(child,childIndex){
+                            [].forEach.call(item.children,function(child,childIndex){
                                 me.items.splice((index+childIndex+1),0,child);
                                 Vue.set(me.items[index+childIndex+1],'parent',item);
                                 //Vue.set(me.items[index+childIndex+1],'level',level);
@@ -111,7 +110,7 @@
                 }
 
                 function open(index,items){
-                    _.each(items,function(child,childIndex){
+                    [].forEach.call(items,function(child,childIndex){
                         child.isShow = true;
                         if(child.children){
                             open(index+childIndex+1,child.children);
@@ -127,7 +126,7 @@
                 }
 
                 function close(index,items){
-                    _.each(items,function(child,childIndex){
+                    [].forEach.call(items,function(child,childIndex){
                         child.isShow = false;
                         if(child.children){
                             close(index+childIndex+1,child.children);
