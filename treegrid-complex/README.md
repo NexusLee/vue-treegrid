@@ -1,3 +1,4 @@
+##### treegrid支持添加删除
 ```
 <treeGrid :items="data" v-on:data-change="listenToMessage"></treeGrid>
 
